@@ -59,3 +59,11 @@ function exibirOpcoes() {
   opcoes.innerHTML = opcoesTexto;
 }
 
+function obterAtributoSelecionado() {
+    var radioAtributo = document.getElementsByName("atributo")
+    for(var i = 0; i < radioAtributo.length; i++){
+        if(radioAtributo[i].checked){
+            return radioAtributo[i].value;
+        }
+    }
+}
