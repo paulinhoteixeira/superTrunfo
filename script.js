@@ -85,23 +85,30 @@ var pontosJogador = 0
 var pontosMaquina = 0
 
 atualizaPlacar()
+atualizaQuantidadeDeCartas()
+
+function atualizaQuantidadeDeCartas(){
+  var divQuantidadeCartas = document.getElementById("quantidade-cartas")
+  var html = "Quantidade de cartas no jogo: " + cartas.length
+
+  divQuantidadeCartas.innerHTML = html
+}
 
 function atualizaPlacar() {
   var divPlacar = document.getElementById("placar")
-  var html = "Jogador " + pontosJogador + "/" + " Máquina"
+  var html = "Jogador " + pontosJogador + "/" + pontosMaquina + " Máquina"
 
   divPlacar.innerHTML = html
 }
 
 function sortearCarta() {
-  var numeroCartaMaquina = parseInt(Math.random() * 3);
+  var numeroCartaMaquina = parseInt(Math.random() * cartas.length);
   cartaMaquina = cartas[numeroCartaMaquina];
+  cartas.splice(numeroCartaMaquina, 1);
 
-  var numeroCartaJogador = parseInt(Math.random() * 3);
-  while (numeroCartaJogador == numeroCartaMaquina) {
-    numeroCartaJogador = parseInt(Math.random() * 3);
-  }
+  var numeroCartaJogador = parseInt(Math.random() * cartas.length);
   cartaJogador = cartas[numeroCartaJogador];
+  cartas.splice(numeroCartaJogador, 1);
   
 
   document.getElementById("btnSortear").disabled = true;
@@ -154,17 +161,24 @@ function jogar() {
     cartaMaquina.atributos[atributoSelecionado]
   ) {
     htmlResultado = "<p class='resultado-final'>Venceu</p>";
+    pontosJogador++;
   } else if (
     cartaJogador.atributos[atributoSelecionado] <
     cartaMaquina.atributos[atributoSelecionado]
   ) {
     htmlResultado = "<p class='resultado-final'>Perdeu</p>";
+    pontosMaquina++
   } else {
     htmlResultado = "<p class='resultado-final'>Empatou</p>";
   }
   divResultado.innerHTML = htmlResultado;
-
+  document.getElementById("btnJogar").disabled = true;
+  document.getElementById("btnProximaRodada").disabled = false
+  
   exibeCartaMaquina();
+  atualizaPlacar();
+  atualizaQuantidadeDeCartas()
+
 }
 
 function exibeCartaMaquina(){
@@ -191,6 +205,21 @@ style=" width: inherit; height: inherit; position: absolute;">`;
   var html = "<div id='opcoes' class='carta-status'>";
 
   divCartaMaquina.innerHTML = moldura + nome + html + opcoesTexto + "</div>";
+}
+
+function proximaRodada(){
+  var divCartas = document.getElementById("cartas")
+
+  divCartas.innerHTML = `<div id="carta-jogador" class="carta></div><div id="carta-maquina" class="carta></div>`;
+
+  document.getElementById("btnSortear").disabled = false;
+  document.getElementById("btnJogar").disabled = true;
+  document.getElementById("btnProximaRodada").disabled = true;
+
+  var divResultado = document.getElementById("resultado")
+
+  divResultado.innerHTML = "";
+
 }
 
 
