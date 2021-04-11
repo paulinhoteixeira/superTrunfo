@@ -80,7 +80,13 @@ var cartaMarvel = {
 
 var cartaMaquina;
 var cartaJogador;
-var cartas = [cartaPaulo, cartaRafa, cartaGuilherme];
+var cartas = [cartaPaulo, cartaRafa, cartaGui, cartaLol, cartaNaruto, cartaHarry, cartaBatman, cartaMarvel]
+var pontosJogador = 0
+var pontosMaquina = 0
+
+function atualizaPlacar() {
+  
+}
 
 function sortearCarta() {
   var numeroCartaMaquina = parseInt(Math.random() * 3);
