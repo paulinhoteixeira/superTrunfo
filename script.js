@@ -1,5 +1,7 @@
 let cartaPaulo = {
   nome: "Seiya de Pegaso",
+  imagem:
+    "https://i.pinimg.com/originals/e9/c1/77/e9c1778727e6c604ace92a2ec73ce52b.jpg",
   atributos: {
     ataque: 80,
     defesa: 60,
@@ -9,6 +11,8 @@ let cartaPaulo = {
 
 let cartaRafa = {
   nome: "Bulbasauro",
+  imagem:
+    "http://4.bp.blogspot.com/-ZoCqleSAYNc/UQgfMdobjUI/AAAAAAAACP0/s_iiWjmw2Ys/s1600/001Bulbasaur_Dream.png",
   atributos: {
     ataque: 70,
     defesa: 65,
@@ -18,6 +22,8 @@ let cartaRafa = {
 
 let cartaGuilherme = {
   nome: "Lorde Darth Vader",
+  imagem:
+    "https://images-na.ssl-images-amazon.com/images/I/51VJBqMZVAL._SX328_BO1,204,203,200_.jpg",
   atributos: {
     ataque: 88,
     defesa: 62,
@@ -32,7 +38,6 @@ var cartas = [cartaPaulo, cartaRafa, cartaGuilherme];
 function sortearCarta() {
   var numeroCartaMaquina = parseInt(Math.random() * 3);
   cartaMaquina = cartas[numeroCartaMaquina];
-  
 
   var numeroCartaJogador = parseInt(Math.random() * 3);
   while (numeroCartaJogador == numeroCartaMaquina) {
@@ -43,7 +48,21 @@ function sortearCarta() {
 
   document.getElementById("btnSortear").disabled = true;
   document.getElementById("btnJogar").disabled = false;
+
+  exibeCartaJogador();
   exibirOpcoes();
+}
+
+function exibeCartaJogador() {
+  var divCartaJogador = document.getElementById("carta-jogador");
+  var moldura = `<img
+src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent-ajustado.png"
+style=" width: inherit; height: inherit; position: absolute;">`;
+
+  divCartaJogador.style.backgroundImage = `url(${cartaJogador.imagem})`;
+  var nome = `<p class="carta-subtitle">${cartaJogador.nome}</p>`;
+
+  divCartaJogador.innerHTML = moldura + nome;
 }
 
 function exibirOpcoes() {
@@ -70,13 +89,19 @@ function obterAtributoSelecionado() {
 
 function jogar() {
   var atributoSelecionado = obterAtributoSelecionado();
-  
-  if (cartaJogador.atributos[atributoSelecionado] > cartaMaquina.atributos[atributoSelecionado]){
-      alert("Venceu! Sua carta é maior!")
-  } else if (cartaJogador.atributos[atributoSelecionado] < cartaMaquina.atributos[atributoSelecionado]){
-      alert("Perdeu! Carta da máquina é maior!")
+
+  if (
+    cartaJogador.atributos[atributoSelecionado] >
+    cartaMaquina.atributos[atributoSelecionado]
+  ) {
+    alert("Venceu! Sua carta é maior!");
+  } else if (
+    cartaJogador.atributos[atributoSelecionado] <
+    cartaMaquina.atributos[atributoSelecionado]
+  ) {
+    alert("Perdeu! Carta da máquina é maior!");
   } else {
-      alert("Empatou!")
+    alert("Empatou!");
   }
-  console.log(cartaMaquina)
+  console.log(cartaMaquina);
 }
