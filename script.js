@@ -50,7 +50,7 @@ function sortearCarta() {
   document.getElementById("btnJogar").disabled = false;
 
   exibeCartaJogador();
-  exibirOpcoes();
+  
 }
 
 function exibeCartaJogador() {
@@ -62,21 +62,22 @@ style=" width: inherit; height: inherit; position: absolute;">`;
   divCartaJogador.style.backgroundImage = `url(${cartaJogador.imagem})`;
   var nome = `<p class="carta-subtitle">${cartaJogador.nome}</p>`;
 
-  divCartaJogador.innerHTML = moldura + nome;
-}
-
-function exibirOpcoes() {
-  var opcoes = document.getElementById("opcoes");
-  var opcoesTexto = "";
+  var opcoesTexto = ""
   for (var atributo in cartaJogador.atributos) {
     opcoesTexto +=
       "<input type='radio' name='atributo' value='" +
       atributo +
       "'>" +
-      atributo;
+      atributo + " " + cartaJogador.atributos[atributo] + "<br>";
   }
-  opcoes.innerHTML = opcoesTexto;
+  
+
+  var html = "<div id='opcoes' class='carta-status'>"
+
+  divCartaJogador.innerHTML = moldura + nome + html + opcoesTexto + "</div>";
 }
+
+
 
 function obterAtributoSelecionado() {
   var radioAtributo = document.getElementsByName("atributo");
