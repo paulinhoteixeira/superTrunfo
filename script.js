@@ -84,8 +84,13 @@ var cartas = [cartaPaulo, cartaRafa, cartaGui, cartaLol, cartaNaruto, cartaHarry
 var pontosJogador = 0
 var pontosMaquina = 0
 
+atualizaPlacar()
+
 function atualizaPlacar() {
-  
+  var divPlacar = document.getElementById("placar")
+  var html = "Jogador " + pontosJogador + "/" + " Máquina"
+
+  divPlacar.innerHTML = html
 }
 
 function sortearCarta() {
