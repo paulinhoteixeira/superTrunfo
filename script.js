@@ -32,7 +32,7 @@ var cartas = [cartaPaulo, cartaRafa, cartaGuilherme];
 function sortearCarta() {
   var numeroCartaMaquina = parseInt(Math.random() * 3);
   cartaMaquina = cartas[numeroCartaMaquina];
-  console.log(cartaMaquina);
+  
 
   var numeroCartaJogador = parseInt(Math.random() * 3);
   while (numeroCartaJogador == numeroCartaMaquina) {
@@ -60,10 +60,23 @@ function exibirOpcoes() {
 }
 
 function obterAtributoSelecionado() {
-    var radioAtributo = document.getElementsByName("atributo")
-    for(var i = 0; i < radioAtributo.length; i++){
-        if(radioAtributo[i].checked){
-            return radioAtributo[i].value;
-        }
+  var radioAtributo = document.getElementsByName("atributo");
+  for (var i = 0; i < radioAtributo.length; i++) {
+    if (radioAtributo[i].checked) {
+      return radioAtributo[i].value;
     }
+  }
+}
+
+function jogar() {
+  var atributoSelecionado = obterAtributoSelecionado();
+  
+  if (cartaJogador.atributos[atributoSelecionado] > cartaMaquina.atributos[atributoSelecionado]){
+      alert("Venceu! Sua carta é maior!")
+  } else if (cartaJogador.atributos[atributoSelecionado] < cartaMaquina.atributos[atributoSelecionado]){
+      alert("Perdeu! Carta da máquina é maior!")
+  } else {
+      alert("Empatou!")
+  }
+  console.log(cartaMaquina)
 }
