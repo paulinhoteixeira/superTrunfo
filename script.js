@@ -187,9 +187,23 @@ function jogar() {
   } else {
     htmlResultado = "<p class='resultado-final'>Empatou</p>";
   }
+
+  if (cartas.length == 0) {
+    alert("Fim de Jogo!");
+    if (pontosJogador > pontosMaquina) {
+      htmlResultado = "<p class='resultado-final'>VENCEU A PARTIDA</p>";
+    } else if (pontosJogador < pontosMaquina) {
+      htmlResultado = "<p class='resultado-final'>PERDEU A PARTIDA</p>";
+    } else {
+      htmlResultado = "<p class='resultado-final'>EMPATOU A PARTIDA</p>";
+    }
+  } else {
+    document.getElementById("btnProximaRodada").disabled = false;
+  }
+
   divResultado.innerHTML = htmlResultado;
   document.getElementById("btnJogar").disabled = true;
-  document.getElementById("btnProximaRodada").disabled = false;
+  
 
   exibeCartaMaquina();
   atualizaPlacar();
